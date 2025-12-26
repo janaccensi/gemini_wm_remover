@@ -126,15 +126,47 @@ def _show_debug_visualization(
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    # Example usage
-    # Place your image in the 'input' folder and name it 'image.jpg', or change the path below.
-    INPUT_FILE = "input/image.jpg"
+    INPUT_DIR = "input"
+    OUTPUT_DIR = "output"
     MASK_FILE = "bin_mask.png"
-    OUTPUT_FILE = "output/cleaned_image.jpg"
     
-    if os.path.exists(INPUT_FILE):
-        # Set debug=True to see the windows, debug=False for headless execution
-        apply_fixed_mask_inpaint(INPUT_FILE, mask_path=MASK_FILE, output_path=OUTPUT_FILE, debug=False)
-    else:
-        print(f"Welcome to WM Remover!")
-        print(f"To test, place an image at '{INPUT_FILE}' and run this script again.")
+    # Ensure resources exist
+    if not os.path.exists(MASK_FILE):
+        print(f"Error: Mask file '{MASK_FILE}' not found.")
+        exit(1)
+        
+    if not os.path.exists(INPUT_DIR):
+        print(f"Error: Input directory '{INPUT_DIR}' not found.")
+        exit(1)
+        
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+        
+    print(f"Scanning '{INPUT_DIR}' for images...")
+    
+    # Supported extensions
+    valid_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".tiff"}
+    
+    processed_count = 0
+    skipped_count = 0
+    
+    for filename in os.listdir(INPUT_DIR):
+        name, ext = os.path.splitext(filename)
+        if ext.lower() not in valid_extensions:
+            continue
+            
+        input_path = os.path.join(INPUT_DIR, filename)
+        output_filename = f"{name}_cleaned{ext}"
+        output_path = os.path.join(OUTPUT_DIR, output_filename)
+        
+        if os.path.exists(output_path):
+            print(f"Skipping '{filename}' (already exists as '{output_filename}')")
+            skipped_count += 1
+            continue
+            
+        print(f"Processing '{filename}'...")
+        apply_fixed_mask_inpaint(input_path, mask_path=MASK_FILE, output_path=output_path, debug=False)
+        processed_count += 1
+        
+    print("-" * 30)
+    print(f"Done! Processed: {processed_count}, Skipped: {skipped_count}")

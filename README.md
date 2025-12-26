@@ -49,14 +49,18 @@ The project is structured for simplicity:
 
 ### 🛠️ Usage
 
-1.  Place the image you want to clean in the `input` folder and name it `image.jpg` (or update the script to match your filename).
+1.  Place all your images in the `input` folder.
 2.  Run the script:
 
     ```bash
     python wm_remover.py
     ```
 
-3.  Check the `output` folder for your cleaned image!
+3.  The script will:
+    *   Scan the `input` folder for images (`.jpg`, `.png`, etc.).
+    *   Process each image and save it to the `output` folder with a `_cleaned` suffix (e.g., `image_cleaned.jpg`).
+    *   **Skip** any files that have already been processed (if the output file exists).
+
 
 ## ⚙️ Customization
 
