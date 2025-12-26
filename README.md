@@ -13,7 +13,22 @@ A lightweight, efficient Python tool to automatically remove watermarks from ima
 
 ### Prerequisites
 
-Ensure you have Python installed. Then, install the required dependencies:
+Ensure you have Python installed.
+
+**Recommended:** It is highly recommended to use a virtual environment to keep your dependencies organized.
+
+```bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate it
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows:
+# venv\Scripts\activate
+```
+
+Then, install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
