@@ -1,6 +1,6 @@
-# 🧹 WM Remover
+# 🧹 Gemini Watermark Remover
 
-A lightweight, efficient Python tool to automatically remove watermarks from images using a fixed binary mask. This tool utilizes OpenCV's inpainting algorithms to seamlessly clean your images.
+A lightweight, efficient Python tool to automatically remove watermarks from images using a fixed binary mask. Right now it's using the gemini binary mask, but it can use any mask you want. This tool utilizes OpenCV's inpainting algorithms to seamlessly clean your images.
 
 ## ✨ Features
 
